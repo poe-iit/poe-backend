@@ -2,8 +2,12 @@
 Fall 2022 poe backend built in python.
 
 ## 📄 Info
+### Important
+System should be integrated into an isolated network as there.
+### Implementation
+Upon the instantiation of `poe.Sys()` a thread is created to manage new TCP connection requests.  Upon establishment of connection, a sperate thread is created to manage independent communications between self and the specific client.  Upon receiving data, it is pushed to the sqlite database.  Database connection instance is shared between all threads. 
 ### Protocol
-Data over TCP as a byte array with the following structural represetation.
+Data over TCP as a byte array with the following structural representation.
 ```
 [opt, id, type, data]
 ```
@@ -30,11 +34,18 @@ pip3 install -r requirements.txt
 ```
 
 ## 🏎 Quick Start
+Startup
 ```
 python3 main.py
 ```
 
+Getting Help
+```
+POE-TERM: h
+```
+
 ## 💻 Usage
+### Library Usage
 ```
 import poeipro as poe
 ...
@@ -44,4 +55,3 @@ poe_main = poe.Sys(ip, port, max_connections, poe_db)
 If no database exists at the provided `db_path`, a new Sqlite database will be instantiated.
 
 `poe.Sys` listens on the provided `ip` and `port`.  `max_connections` governs the maximum amount of clients connecting to the system.  `poe_db` references the previously created `poe.DB` class.
-
