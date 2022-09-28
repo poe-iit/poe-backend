@@ -24,6 +24,17 @@ Data over TCP as a byte array with the following structural representation.
 ```
 b'\x01\xFF\x00\x01'
 ```
+### Data Lifecycle
+```
+Arduino.GetsDataFromSensors
+Arduino.SendsDataOverTCP
+    |
+    v
+Host.SendDataToDatabase
+    |
+    v
+Database.Insert/ReplaceData
+```
 
 ## 🔧 Setup
 ### Dependencies:
