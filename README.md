@@ -1,5 +1,5 @@
 # 🔌💫 poe-backend
-Fall 2022 poe backend built in python.
+Fall 2022 poe backend based off of poe-iit summer 2022 IPRO setup.
 
 ## 📄 Info
 ### Important
