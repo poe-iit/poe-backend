@@ -36,6 +36,15 @@ Host.SendDataToDatabase
 Database.Insert/ReplaceData
 ```
 
+### Database Structure
+```
+sensors (
+ip_id TEXT PRIMARY KEY NOT NULL,
+sensor TEXT NOT NULL,
+value INTEGER NOT NULL,
+time REAL NOT NULL);
+```
+
 ## 🔧 Setup
 ### Dependencies:
 python3
