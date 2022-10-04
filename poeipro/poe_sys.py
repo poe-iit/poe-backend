@@ -10,11 +10,10 @@ from collections import deque
 
 class Sys:
     def __init__(self, ip, port, max_connections, poe_db):
-        global poe_main
-        poe_main = self
+        # global poe_main
+        # poe_main = self
 
         # Not sure if 100% db needs a lock, just assumed so
-        self.db_lock        = allocate_lock()
         self.db             = poe_db
 
         self.connections    = []
@@ -39,9 +38,9 @@ class Sys:
 
     def post_update_db(self, data):
         unpack_data = data.to_tupple()
-        self.db_lock.acquire()
+        self.db.lock.acquire()
         self.db.upload(unpack_data)
-        self.db_lock.release()
+        self.db.lock.release()
 
     def list_connections(self, opt):
         for connection in self.connections:

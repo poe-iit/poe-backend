@@ -1,10 +1,12 @@
 import sqlite3
 import os.path
 import time
+from _thread import *
 
 class DB:
     def __init__(self, db_file):
-        conn = None
+        self.lock = allocate_lock()
+        self.conn = None
 
         if not os.path.exists(db_file):
             self.create_db_file(db_file)
