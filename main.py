@@ -1,6 +1,7 @@
 import poeipro as poe
 
 import os
+import time
 import socket
 from _thread import *
 
@@ -16,9 +17,9 @@ def help(opt):
     q: quit
     l: list connections
     t: test by launching fake client
-        -c: number of clients
-        -p: number of packets per client; -1 = inf
-        -t: time (seconds) between sending packet
+        -c <int>: number of clients
+        -p <int>: number of packets per client; -1 = inf
+        -t <float>: time (seconds) between sending packet
     """
     print(s)
 
@@ -76,7 +77,7 @@ def terminal_proc():
 
 if __name__ == "__main__":
     # Scale horizontally with multiple Poe objects, if bottleneck appears
-    # Fault loop, auto recovery.  Test Fault loop later
+    # Fault loop, auto recovery.  Remove fault loop later, potential issues rebind socket
     #ip = auto_resolve_ip()
     while True:
         try:
@@ -85,8 +86,13 @@ if __name__ == "__main__":
             poe_main = poe.Sys(ip, port, max_connections, poe_db)
             terminal_proc()
         except Exception as e:
+            print("[ERR]: " + str(e))
             print("[ERR]: Restarting program")
-            sleep(10)
+            try:
+                poe_main.stop()
+            except:
+                pass
+            time.sleep(1)
 
 
     
