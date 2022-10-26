@@ -13,7 +13,11 @@ class DB:
         else:
             self.create_connection(db_file)
 
+    def stop():
+        self.conn.close()
+
     def upload(self, data):
+        self.lock.acquire()
         self.conn.execute(
                     """INSERT OR REPLACE INTO sensors 
                     (ip_id, sensor, value, time) 
@@ -21,6 +25,7 @@ class DB:
                     """,
                     data)
         self.conn.commit()
+        self.lock.release()
 
     def create_connection(self, db_file):
         try:
