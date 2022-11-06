@@ -77,3 +77,6 @@ poe_main = poe.Sys(ip, port, max_connections, poe_db)
 If no database exists at the provided `db_path`, a new Sqlite database will be instantiated.
 
 `poe.Sys` listens on the provided `ip` and `port`.  `max_connections` governs the maximum amount of clients connecting to the system.  `poe_db` references the previously created `poe.DB` class.
+
+## ✏️ Acknowledgements
+Fall 2022 poe backend based off of poe-iit summer 2022 IPRO setup.
