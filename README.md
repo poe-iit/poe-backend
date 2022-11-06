@@ -4,6 +4,8 @@ Fall 2022 poe backend based off of poe-iit summer 2022 IPRO setup.
 ## 📄 Info
 ### Important
 System should be integrated into an isolated network as there.
+### Compatibility
+Designed to work with: https://github.com/poe-iit/Arduino-Code/tree/ethernet
 ### Implementation
 Upon the instantiation of `poe.Sys()` a thread is created to manage new TCP connection requests.  Upon establishment of connection, a sperate thread is created to manage independent communications between self and the specific client.  Upon receiving data, it is pushed to the sqlite database.  Database connection instance is shared between all threads. 
 ### Protocol
