@@ -18,13 +18,17 @@ class DB:
 
     def upload(self, data):
         self.lock.acquire()
-        self.conn.execute(
-                    """INSERT OR REPLACE INTO sensors 
-                    (ip_id, sensor, value, time) 
-                    VALUES(?, ?, ?, ?)
-                    """,
-                    data)
-        self.conn.commit()
+        try:
+            self.conn.cursor().execute(
+                        """INSERT OR REPLACE INTO sensors 
+                        (ip_id, sensor, value, time) 
+                        VALUES(?, ?, ?, ?)
+                        """,
+                        data)
+            self.conn.commit()
+        except Exception as e:
+            print(e)
+            print('[ERROR]:db_upload_error')
         self.lock.release()
 
     def create_connection(self, db_file):
