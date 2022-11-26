@@ -4,6 +4,9 @@ import time
 from _thread import *
 
 class DB:
+    #table_name = "sensors"
+    table_name = "myapp_sensors_table"
+
     def __init__(self, db_file):
         self.lock = allocate_lock()
         self.conn = None
@@ -20,10 +23,10 @@ class DB:
         self.lock.acquire()
         try:
             self.conn.cursor().execute(
-                        """INSERT OR REPLACE INTO sensors 
-                        (ip_id, sensor, value, time) 
-                        VALUES(?, ?, ?, ?)
-                        """,
+                        """INSERT OR REPLACE INTO {0} 
+                        (ip_id, sensor, value, time, status) 
+                        VALUES(?, ?, ?, ?, ?)
+                        """.format(self.table_name),
                         data)
             self.conn.commit()
         except Exception as e:
@@ -39,12 +42,13 @@ class DB:
             print(e)
 
     def create_db_file(self, db_file):
-        table = """ CREATE TABLE IF NOT EXISTS sensors (
+        table = """ CREATE TABLE IF NOT EXISTS {0} (
                 ip_id TEXT PRIMARY KEY NOT NULL,
                 sensor TEXT NOT NULL,
                 value INTEGER NOT NULL,
-                time REAL NOT NULL
-            ); """
+                time REAL NOT NULL,
+                status TEXT NOT NULL
+            ); """.format(self.table_name)
 
         with open(db_file, 'w') as fp:
             pass

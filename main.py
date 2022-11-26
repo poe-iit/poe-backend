@@ -6,7 +6,8 @@ import socket
 from _thread import *
 
 __location__    = os.path.realpath(os.path.join(os.getcwd(), os.path.dirname(__file__)))
-db_path         = os.path.join(__location__, "database.db")
+#db_path         = os.path.join(__location__, "database.db")
+db_path         = os.path.join(__location__, "../Software-Frontend-Backend-master/IPRO_SOTERIA/db.sqlite3")
 poe_main        = None
 port            = 1234
 max_connections = 1024
